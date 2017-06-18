@@ -21,7 +21,7 @@ def get_argument_type(type_hint, default_value):
     return arg_type
 
 def get_doc_data(definition_line):
-
+    args_data = []
     result = re.search(
         'function (?P<name>.+?)\((?P<args>.+?)?\)$',
         definition_line
@@ -30,7 +30,6 @@ def get_doc_data(definition_line):
     args = result.group('args')
 
     if args:
-        args_data = []
         args = [arg.strip() for arg in args.split(',')]
 
         for arg in args:
@@ -68,7 +67,7 @@ def generate_doc_comment(doc_data, indent):
     for item in doc_data:
         lines.append(' ' * indent + ' * @param %s %s ' % (item['type'], item['arg_name']))
 
-    lines.append(' ' * indent + ' */')
+    lines.append(' ' * indent + ' */\n')
 
     return '\n'.join(lines)
 
@@ -87,11 +86,10 @@ try:
 		doc_data = get_doc_data(definition_line)
 		indent = get_leading_spaces_qty(definition_line)
 		doc_comment = generate_doc_comment(doc_data, indent)
-		print(doc_comment)
 
                 if doc_comment:
                     with open(active_buffer_name + '.bak', 'w') as tmp_file:
-                        i = 1
+                        i = 0
 
                         for line in lines:
                             if i == current_line:
@@ -101,7 +99,6 @@ try:
                             i += 1
 
                         tmp_file.close()
-
 
 	    handler.close()
 
