@@ -8,5 +8,6 @@ function! PhpDocPasteComment()
     if filereadable(s:plugindir . "/plugin/python/phpdoc.py")
         let $python_script = s:plugindir . "/plugin/python/phpdoc.py"
         execute (has('python3') ? 'py3file' : 'pyfile') $python_script
+        :edit
     endif
 endfunction

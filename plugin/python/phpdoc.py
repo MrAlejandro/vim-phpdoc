@@ -1,5 +1,4 @@
-import vim
-import re
+import vim, re, os
 
 def is_valid_php_file(filepath):
     return  str(filepath)[-4:] == '.php'
@@ -109,5 +108,10 @@ try:
                         tmp_file.close()
 
             handler.close()
+
+        # replace old file with a new one
+        if replace:
+            os.remove(active_buffer_name)
+            os.rename(active_buffer_name + '.bak', active_buffer_name)
 except:
     print('Error')
