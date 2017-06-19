@@ -83,9 +83,9 @@ try:
 
             if len(lines) > current_line:
                 definition_line = lines[current_line]
-		doc_data = get_doc_data(definition_line)
-		indent = get_leading_spaces_qty(definition_line)
-		doc_comment = generate_doc_comment(doc_data, indent)
+                doc_data = get_doc_data(definition_line)
+                indent = get_leading_spaces_qty(definition_line)
+                doc_comment = generate_doc_comment(doc_data, indent)
 
                 if doc_comment:
                     with open(active_buffer_name + '.bak', 'w') as tmp_file:
@@ -100,7 +100,6 @@ try:
 
                         tmp_file.close()
 
-	    handler.close()
-
+            handler.close()
 except:
     print('Error')
