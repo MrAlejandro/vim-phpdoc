@@ -68,7 +68,6 @@ def generate_doc_comment(doc_data, indent):
     for item in doc_data:
         lines.append(' ' * indent + ' * @param %s %s ' % (item['type'], item['arg_name']))
 
-    lines.append(' ' * indent + ' *') # empty line after args/before return
     lines.append(' ' * indent + ' * @return mixed')
     lines.append(' ' * indent + ' */\n')
 
