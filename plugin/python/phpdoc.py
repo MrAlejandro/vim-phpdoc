@@ -15,6 +15,8 @@ def get_argument_type(type_hint, default_value):
     elif default_value:
         if "'" in default_value or '"' in default_value: # string passed as default value
             arg_type = 'string'
+        elif default_value.lower() == 'true' or default_value.lower() == 'false': # boolean value
+            arg_type = 'boolean'
         elif default_value.lower() != 'null': # if not null then integer
             arg_type = 'integer'
 
@@ -67,6 +69,8 @@ def generate_doc_comment(doc_data, indent):
     for item in doc_data:
         lines.append(' ' * indent + ' * @param %s %s ' % (item['type'], item['arg_name']))
 
+    lines.append(' ' * indent + ' *') # empty line after args/before return
+    lines.append(' ' * indent + ' * @return mixed')
     lines.append(' ' * indent + ' */\n')
 
     return '\n'.join(lines)
