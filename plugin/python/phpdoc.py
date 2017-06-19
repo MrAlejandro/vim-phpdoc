@@ -80,6 +80,7 @@ try:
     active_buffer_name = active_buffer.name
 
     if is_valid_php_file(active_buffer_name):
+        replace = False
         current_line = int(vim.current.range.start)
 
         with open(active_buffer_name, 'r') as handler:
@@ -101,6 +102,9 @@ try:
 
                             tmp_file.write(line)
                             i += 1
+
+                        if handler.tell() < tmp_file.tell():
+                            replace = True
 
                         tmp_file.close()
 
